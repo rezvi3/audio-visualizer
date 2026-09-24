@@ -88,7 +88,7 @@ export const CounterTravelStage: React.FC<CounterTravelStageProps> = ({
             }}
           >
             <img
-              src="/rotor-disc.png"
+              src={`${import.meta.env.BASE_URL}rotor-disc.png`}
               alt="Precision Machined Rotor Disc"
               width={934}
               height={934}

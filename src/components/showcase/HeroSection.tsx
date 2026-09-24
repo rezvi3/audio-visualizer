@@ -126,7 +126,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenStudio, heroPara
         }}
       >
         <img
-          src="/hero-transducer.png"
+          src={`${import.meta.env.BASE_URL}hero-transducer.png`}
           alt="MK-VII Precision Acoustic Transducer"
           width={796}
           height={559}
