@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background-color: #EFEFEE;
+    color: #0D0D0F;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Custom range sliders for sleek creative studio look */
+  input[type='range'] {
+    -webkit-appearance: none;
+    appearance: none;
+    background: #181b2a;
+    border-radius: 4px;
+    height: 5px;
+    outline: none;
+    transition: background 0.15s ease;
+  }
+
+  input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #00f0ff;
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(0, 240, 255, 0.6);
+    transition: transform 0.1s ease, background 0.15s ease;
+  }
+
+  input[type='range']::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    background: #7df9ff;
+  }
+
+  input[type='range']::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #00f0ff;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 0 8px rgba(0, 240, 255, 0.6);
+    transition: transform 0.1s ease, background 0.15s ease;
+  }
+
+  /* Custom subtle scrollbars */
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0d0f17;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #22273d;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #323957;
+  }
+}
+
+.glow-cyan {
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.35);
+}
+
+.glow-text-cyan {
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.7);
+}
+
+.glow-magenta {
+  box-shadow: 0 0 15px rgba(255, 0, 127, 0.35);
+}
+
+/* Editorial Achromatic Technical Presentation System */
+.font-display {
+  font-family: 'Archivo', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.font-mono {
+  font-family: 'IBM Plex Mono', 'JetBrains Mono', monospace;
+}
+
+/* Progressive scroll reveal classes */
+.js .reveal-init {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.95s cubic-bezier(0.16, 1, 0.3, 1), transform 0.95s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.js .reveal-init.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal-init {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
