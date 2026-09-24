@@ -18,20 +18,27 @@ export default {
         signalLift: '#7C97FF',
         // Audio Visualizer Studio Colors
         studio: {
-          950: '#090a0f',
-          900: '#0d0f17',
-          850: '#121520',
-          800: '#181b2a',
-          700: '#22273d',
-          600: '#323957',
-          500: '#4c5682',
-          400: '#7580b0',
+          950: '#08090c',
+          900: '#0d0f16',
+          850: '#131620',
+          800: '#1a1e2c',
+          750: '#22283a',
+          700: '#2a3146',
+          600: '#3a4460',
+          500: '#505c80',
+          400: '#7a88b0',
           accent: '#00f0ff',
           neonPink: '#ff007f',
           neonGreen: '#00ff88',
           neonAmber: '#ffaa00',
           neonPurple: '#a855f7'
         }
+      },
+      boxShadow: {
+        'studio-glow': '0 0 20px rgba(0, 240, 255, 0.3)',
+        'studio-glow-lg': '0 0 35px rgba(0, 240, 255, 0.45)',
+        'studio-glass': 'inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 8px 32px rgba(0, 0, 0, 0.5)',
+        'studio-inner': 'inset 0 2px 4px rgba(0, 0, 0, 0.6)',
       },
       fontFamily: {
         display: ['Archivo', 'sans-serif'],

@@ -49,21 +49,21 @@ export const XYControlsPanel: React.FC = () => {
   return (
     <div className="space-y-5 text-xs">
       {/* Top Flagship Banner & Quick Randomize */}
-      <div className="p-3 rounded-xl bg-gradient-to-r from-cyan-950/60 via-purple-950/40 to-studio-900 border border-cyan-500/30 flex items-center justify-between">
+      <div className="p-3.5 rounded-xl bg-gradient-to-r from-cyan-950/70 via-purple-950/40 to-studio-900 border border-cyan-500/40 shadow-[0_0_20px_rgba(0,240,255,0.15)] flex items-center justify-between">
         <div>
           <div className="flex items-center gap-1.5">
             <Orbit className="w-4 h-4 text-cyan-400 animate-spin" style={{ animationDuration: '8s' }} />
-            <span className="font-bold text-slate-100 uppercase tracking-wider text-[11px]">
-              XY Lissajous Engine
+            <span className="font-bold text-slate-100 uppercase tracking-wider text-[11px] font-mono">
+              XY Lissajous Vector
             </span>
           </div>
-          <p className="text-[10px] text-cyan-300/70 mt-0.5">
-            Analog XY Trajectory & Generative Art
+          <p className="text-[10px] text-cyan-300/80 mt-0.5 font-mono">
+            Direct Web Audio Channel Splitter
           </p>
         </div>
         <button
           onClick={randomizeXY}
-          className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-500/40 text-[11px] font-medium transition-all active:scale-95 shadow-sm"
+          className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-500/50 text-[11px] font-medium transition-all active:scale-95 shadow-[0_0_8px_rgba(0,240,255,0.2)] cursor-pointer"
           title="Randomize XY Geometry & Beam"
         >
           <Wand2 className="w-3.5 h-3.5" />
@@ -74,10 +74,10 @@ export const XYControlsPanel: React.FC = () => {
       {/* ================= 1. SIGNAL SOURCE ================= */}
       <div className="space-y-2.5">
         <div className="flex items-center justify-between">
-          <span className="text-[10px] font-mono uppercase text-cyan-400 font-semibold tracking-wider">
-            1. Signal Source Mode
+          <span className="text-[10px] font-mono uppercase text-cyan-400 font-bold tracking-wider">
+            1. Signal Routing
           </span>
-          <span className="text-[10px] font-mono text-slate-500">X(t) vs Y(t)</span>
+          <span className="text-[10px] font-mono text-slate-400">X(t) vs Y(t)</span>
         </div>
 
         <div className="grid grid-cols-2 gap-1.5">
@@ -87,34 +87,37 @@ export const XYControlsPanel: React.FC = () => {
             { id: 'bass-treble', name: 'Bass vs Treble', desc: 'X = Bass, Y = Treble' },
             { id: 'mid-high', name: 'Mid vs High-Mid', desc: 'X = Mid, Y = High-Mid' },
             { id: 'bass-mid', name: 'Bass vs Mid', desc: 'X = Bass, Y = Mid' },
-            { id: 'mono', name: 'Mono Phase Shift', desc: '90° Quadrature delay' },
+            { id: 'mono', name: 'Mono Quadrature', desc: '90° Hilbert delay' },
           ].map((src) => (
             <button
               key={src.id}
               onClick={() => updateXYConfig({ sourceMode: src.id as XYSignalSource })}
-              className={`p-2 rounded-lg border text-left transition-all ${
+              className={`p-2.5 rounded-xl border text-left transition-all cursor-pointer ${
                 xyConfig.sourceMode === src.id
-                  ? 'border-cyan-500 bg-cyan-950/40 text-cyan-200 shadow-sm shadow-cyan-500/10'
-                  : 'border-studio-800 bg-studio-850 hover:bg-studio-800 text-slate-300'
+                  ? 'border-cyan-400 bg-cyan-950/60 text-cyan-200 shadow-[0_0_12px_rgba(0,240,255,0.2)]'
+                  : 'border-white/[0.08] bg-studio-900/80 hover:bg-studio-850 hover:border-white/[0.14] text-slate-300'
               }`}
             >
               <div className="font-semibold text-[11px] truncate">{src.name}</div>
-              <div className="text-[9px] text-slate-500 truncate mt-0.5">{src.desc}</div>
+              <div className="text-[9px] text-slate-400 truncate mt-0.5 font-mono">{src.desc}</div>
             </button>
           ))}
         </div>
       </div>
 
       {/* ================= 2. GEOMETRY & FREQUENCY RATIOS ================= */}
-      <div className="space-y-3 pt-2 border-t border-studio-800">
-        <span className="text-[10px] font-mono uppercase text-cyan-400 font-semibold tracking-wider block">
-          2. Lissajous Ratios & Phase
-        </span>
+      <div className="space-y-3 pt-3 border-t border-white/[0.08]">
+        <div className="flex items-center justify-between">
+          <span className="text-[10px] font-mono uppercase text-cyan-400 font-bold tracking-wider">
+            2. Harmonic Ratios & Phase
+          </span>
+          <span className="text-[10px] font-mono text-slate-400">fx : fy</span>
+        </div>
 
         {/* Ratio Quick Presets */}
         <div>
-          <label className="text-slate-400 text-[11px] block mb-1">Harmonic Frequency Ratio (fx : fy)</label>
-          <div className="grid grid-cols-5 gap-1">
+          <label className="text-slate-300 text-[11px] block mb-1.5 font-medium">Harmonic Frequency Ratio Preset</label>
+          <div className="grid grid-cols-5 gap-1.5">
             {RATIO_PRESETS.map((rp) => (
               <button
                 key={rp.label}
@@ -123,10 +126,10 @@ export const XYControlsPanel: React.FC = () => {
                   freqRatioY: rp.ry,
                   ratioPreset: rp.label
                 })}
-                className={`py-1 rounded border text-xs font-mono font-medium transition-all ${
+                className={`py-1 rounded-lg border text-xs font-mono font-medium transition-all cursor-pointer ${
                   xyConfig.freqRatioX === rp.rx && xyConfig.freqRatioY === rp.ry
-                    ? 'border-cyan-500 bg-cyan-950/60 text-cyan-300 font-bold'
-                    : 'border-studio-800 bg-studio-850 hover:bg-studio-800 text-slate-400'
+                    ? 'border-cyan-400 bg-cyan-950 text-cyan-300 font-bold shadow-[0_0_10px_rgba(0,240,255,0.25)]'
+                    : 'border-white/[0.08] bg-studio-900/80 hover:bg-studio-850 text-slate-400 hover:text-white'
                 }`}
               >
                 {rp.label}
@@ -137,10 +140,10 @@ export const XYControlsPanel: React.FC = () => {
 
         {/* Custom Ratios Sliders */}
         <div className="grid grid-cols-2 gap-3">
-          <div>
-            <div className="flex justify-between items-center mb-1">
-              <span className="text-slate-400 text-[11px]">Ratio X</span>
-              <span className="font-mono text-cyan-400">{xyConfig.freqRatioX.toFixed(1)}</span>
+          <div className="p-2.5 rounded-xl bg-studio-900/60 border border-white/[0.06]">
+            <div className="flex justify-between items-center mb-1.5">
+              <span className="text-slate-300 text-[11px] font-medium">Ratio X</span>
+              <span className="font-mono text-cyan-300 text-[10px] px-1.5 py-0.5 rounded bg-studio-950 border border-white/[0.08]">{xyConfig.freqRatioX.toFixed(1)}</span>
             </div>
             <input
               type="range"
@@ -153,10 +156,10 @@ export const XYControlsPanel: React.FC = () => {
             />
           </div>
 
-          <div>
-            <div className="flex justify-between items-center mb-1">
-              <span className="text-slate-400 text-[11px]">Ratio Y</span>
-              <span className="font-mono text-cyan-400">{xyConfig.freqRatioY.toFixed(1)}</span>
+          <div className="p-2.5 rounded-xl bg-studio-900/60 border border-white/[0.06]">
+            <div className="flex justify-between items-center mb-1.5">
+              <span className="text-slate-300 text-[11px] font-medium">Ratio Y</span>
+              <span className="font-mono text-cyan-300 text-[10px] px-1.5 py-0.5 rounded bg-studio-950 border border-white/[0.08]">{xyConfig.freqRatioY.toFixed(1)}</span>
             </div>
             <input
               type="range"
@@ -170,11 +173,11 @@ export const XYControlsPanel: React.FC = () => {
           </div>
         </div>
 
-        {/* Phase Speed & Reactive Phase */}
-        <div>
-          <div className="flex justify-between items-center mb-1">
-            <span className="text-slate-300 font-medium">Phase Rotation Speed</span>
-            <span className="font-mono text-cyan-400">{xyConfig.phaseSpeed.toFixed(2)}</span>
+        {/* Phase Speed */}
+        <div className="p-2.5 rounded-xl bg-studio-900/60 border border-white/[0.06]">
+          <div className="flex justify-between items-center mb-1.5">
+            <span className="text-slate-300 font-medium">Phase Rotation Velocity</span>
+            <span className="font-mono text-cyan-300 text-[10px] px-1.5 py-0.5 rounded bg-studio-950 border border-white/[0.08]">{xyConfig.phaseSpeed.toFixed(2)}</span>
           </div>
           <input
             type="range"
@@ -189,22 +192,22 @@ export const XYControlsPanel: React.FC = () => {
 
         {/* Reactive Switches */}
         <div className="grid grid-cols-2 gap-2 pt-1">
-          <label className="flex items-center gap-1.5 cursor-pointer text-slate-300 text-[11px]">
+          <label className="flex items-center gap-2 cursor-pointer p-2 rounded-lg bg-studio-900/60 border border-white/[0.06] text-slate-300 text-[11px] hover:border-cyan-500/30">
             <input
               type="checkbox"
               checked={xyConfig.reactiveFrequencyRatio}
               onChange={(e) => updateXYConfig({ reactiveFrequencyRatio: e.target.checked })}
-              className="rounded bg-studio-800 border-studio-700 text-cyan-500 focus:ring-0"
+              className="rounded bg-studio-800 border-white/[0.1] text-cyan-500 focus:ring-0"
             />
             <span>Audio Morphs Ratio</span>
           </label>
 
-          <label className="flex items-center gap-1.5 cursor-pointer text-slate-300 text-[11px]">
+          <label className="flex items-center gap-2 cursor-pointer p-2 rounded-lg bg-studio-900/60 border border-white/[0.06] text-slate-300 text-[11px] hover:border-cyan-500/30">
             <input
               type="checkbox"
               checked={xyConfig.reactivePhase}
               onChange={(e) => updateXYConfig({ reactivePhase: e.target.checked })}
-              className="rounded bg-studio-800 border-studio-700 text-cyan-500 focus:ring-0"
+              className="rounded bg-studio-800 border-white/[0.1] text-cyan-500 focus:ring-0"
             />
             <span>Bass Advances Phase</span>
           </label>
@@ -212,27 +215,27 @@ export const XYControlsPanel: React.FC = () => {
       </div>
 
       {/* ================= 3. BEAM STYLE & LUMINESCENCE ================= */}
-      <div className="space-y-3 pt-2 border-t border-studio-800">
-        <span className="text-[10px] font-mono uppercase text-cyan-400 font-semibold tracking-wider block">
-          3. Electron Beam & Luminous Glow
+      <div className="space-y-3 pt-3 border-t border-white/[0.08]">
+        <span className="text-[10px] font-mono uppercase text-cyan-400 font-bold tracking-wider block">
+          3. Beam Style & Phosphor Bloom
         </span>
 
         <div>
-          <label className="text-slate-400 text-[11px] block mb-1.5">Beam Rendering Style</label>
-          <div className="grid grid-cols-3 gap-1.5">
+          <label className="text-slate-300 text-[11px] block mb-1.5 font-medium">Beam Shader Profile</label>
+          <div className="grid grid-cols-2 gap-1.5">
             {[
               { id: 'neon', label: 'Neon Bloom' },
               { id: 'gradient', label: 'Spectral Gradient' },
-              { id: 'multiline', label: 'Multi-Beam' },
-              { id: 'solid', label: 'Solid Vector' },
+              { id: 'multiline', label: 'Multi-Phase Beam' },
+              { id: 'solid', label: 'Solid Vector Trace' },
             ].map((b) => (
               <button
                 key={b.id}
                 onClick={() => updateXYConfig({ beamStyle: b.id as XYBeamStyle })}
-                className={`py-1.5 rounded-lg border text-center font-medium transition-all ${
+                className={`py-2 px-2.5 rounded-xl border text-center font-medium transition-all cursor-pointer ${
                   xyConfig.beamStyle === b.id
-                    ? 'border-cyan-500 bg-cyan-950/60 text-cyan-300 font-bold'
-                    : 'border-studio-800 bg-studio-850 hover:bg-studio-800 text-slate-400'
+                    ? 'border-cyan-400 bg-cyan-950 text-cyan-300 font-bold shadow-[0_0_12px_rgba(0,240,255,0.25)]'
+                    : 'border-white/[0.08] bg-studio-900/80 hover:bg-studio-850 text-slate-300 hover:text-white'
                 }`}
               >
                 {b.label}
@@ -241,10 +244,10 @@ export const XYControlsPanel: React.FC = () => {
           </div>
         </div>
 
-        <div>
-          <div className="flex justify-between items-center mb-1">
-            <span className="text-slate-300 font-medium">Beam Thickness</span>
-            <span className="font-mono text-cyan-400">{xyConfig.thickness.toFixed(1)} px</span>
+        <div className="p-2.5 rounded-xl bg-studio-900/60 border border-white/[0.06]">
+          <div className="flex justify-between items-center mb-1.5">
+            <span className="text-slate-300 font-medium">Vector Beam Thickness</span>
+            <span className="font-mono text-cyan-300 text-[10px] px-1.5 py-0.5 rounded bg-studio-950 border border-white/[0.08]">{xyConfig.thickness.toFixed(1)} px</span>
           </div>
           <input
             type="range"
@@ -257,10 +260,10 @@ export const XYControlsPanel: React.FC = () => {
           />
         </div>
 
-        <div>
-          <div className="flex justify-between items-center mb-1">
-            <span className="text-slate-300 font-medium">Glow Intensity</span>
-            <span className="font-mono text-cyan-400">{xyConfig.glowIntensity.toFixed(1)}×</span>
+        <div className="p-2.5 rounded-xl bg-studio-900/60 border border-white/[0.06]">
+          <div className="flex justify-between items-center mb-1.5">
+            <span className="text-slate-300 font-medium">Luminescent Glow Intensity</span>
+            <span className="font-mono text-cyan-300 text-[10px] px-1.5 py-0.5 rounded bg-studio-950 border border-white/[0.08]">{xyConfig.glowIntensity.toFixed(1)}×</span>
           </div>
           <input
             type="range"
@@ -273,10 +276,10 @@ export const XYControlsPanel: React.FC = () => {
           />
         </div>
 
-        <div>
-          <div className="flex justify-between items-center mb-1">
-            <span className="text-slate-300 font-medium">Phosphor Trail Persistence</span>
-            <span className="font-mono text-cyan-400">{Math.round(xyConfig.trailPersistence * 100)}%</span>
+        <div className="p-2.5 rounded-xl bg-studio-900/60 border border-white/[0.06]">
+          <div className="flex justify-between items-center mb-1.5">
+            <span className="text-slate-300 font-medium">Phosphor Persistence (Trails)</span>
+            <span className="font-mono text-cyan-300 text-[10px] px-1.5 py-0.5 rounded bg-studio-950 border border-white/[0.08]">{Math.round(xyConfig.trailPersistence * 100)}%</span>
           </div>
           <input
             type="range"
@@ -290,45 +293,45 @@ export const XYControlsPanel: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-2 gap-2 pt-1">
-          <label className="flex items-center gap-1.5 cursor-pointer text-slate-300 text-[11px]">
+          <label className="flex items-center gap-2 cursor-pointer p-2 rounded-lg bg-studio-900/60 border border-white/[0.06] text-slate-300 text-[11px] hover:border-cyan-500/30">
             <input
               type="checkbox"
               checked={xyConfig.reactiveLineWidth}
               onChange={(e) => updateXYConfig({ reactiveLineWidth: e.target.checked })}
-              className="rounded bg-studio-800 border-studio-700 text-cyan-500 focus:ring-0"
+              className="rounded bg-studio-800 border-white/[0.1] text-cyan-500 focus:ring-0"
             />
-            <span>Bass Thickens Beam</span>
+            <span>Bass Modulates Width</span>
           </label>
 
-          <label className="flex items-center gap-1.5 cursor-pointer text-slate-300 text-[11px]">
+          <label className="flex items-center gap-2 cursor-pointer p-2 rounded-lg bg-studio-900/60 border border-white/[0.06] text-slate-300 text-[11px] hover:border-cyan-500/30">
             <input
               type="checkbox"
               checked={xyConfig.velocityModulation}
               onChange={(e) => updateXYConfig({ velocityModulation: e.target.checked })}
-              className="rounded bg-studio-800 border-studio-700 text-cyan-500 focus:ring-0"
+              className="rounded bg-studio-800 border-white/[0.1] text-cyan-500 focus:ring-0"
             />
-            <span>Velocity Luminosity</span>
+            <span>Velocity Luminance</span>
           </label>
         </div>
       </div>
 
       {/* ================= 4. DISTORTION & KALEIDOSCOPE SYMMETRY ================= */}
-      <div className="space-y-3 pt-2 border-t border-studio-800">
-        <span className="text-[10px] font-mono uppercase text-cyan-400 font-semibold tracking-wider block">
-          4. Symmetry & Generative Distortion
+      <div className="space-y-3 pt-3 border-t border-white/[0.08]">
+        <span className="text-[10px] font-mono uppercase text-cyan-400 font-bold tracking-wider block">
+          4. Radial Symmetry & Non-Linear Warp
         </span>
 
         <div>
-          <label className="text-slate-400 text-[11px] block mb-1">Kaleidoscope Radial Symmetry</label>
+          <label className="text-slate-300 text-[11px] block mb-1.5 font-medium">Kaleidoscope Radial Symmetry</label>
           <div className="grid grid-cols-8 gap-1">
             {SYMMETRIES.map((sym) => (
               <button
                 key={sym}
                 onClick={() => updateXYConfig({ symmetry: sym })}
-                className={`py-1 rounded border text-xs font-mono font-medium transition-all ${
+                className={`py-1.5 rounded-lg border text-xs font-mono font-medium transition-all cursor-pointer ${
                   xyConfig.symmetry === sym
-                    ? 'border-cyan-500 bg-cyan-950/60 text-cyan-300 font-bold'
-                    : 'border-studio-800 bg-studio-850 hover:bg-studio-800 text-slate-400'
+                    ? 'border-cyan-400 bg-cyan-950 text-cyan-300 font-bold shadow-[0_0_8px_rgba(0,240,255,0.25)]'
+                    : 'border-white/[0.08] bg-studio-900/80 hover:bg-studio-850 text-slate-400 hover:text-white'
                 }`}
               >
                 {sym}×
@@ -339,13 +342,13 @@ export const XYControlsPanel: React.FC = () => {
 
         <div className="grid grid-cols-2 gap-2">
           <div>
-            <label className="text-slate-400 text-[11px] block mb-1">Distortion Type</label>
+            <label className="text-slate-300 text-[11px] block mb-1.5 font-medium">Warp Distortion</label>
             <select
               value={xyConfig.distortionType}
               onChange={(e) => updateXYConfig({ distortionType: e.target.value as XYDistortionType })}
-              className="w-full bg-studio-800 border border-studio-700 rounded px-2 py-1 text-slate-200 text-xs"
+              className="w-full bg-studio-950 border border-white/[0.1] rounded-lg px-2.5 py-1.5 text-slate-200 text-xs focus:outline-none focus:border-cyan-500/60"
             >
-              <option value="none">None</option>
+              <option value="none">None (Clean)</option>
               <option value="radial">Radial Swirl</option>
               <option value="wave">Waveform Ripple</option>
               <option value="noise">Procedural Noise</option>
@@ -354,7 +357,7 @@ export const XYControlsPanel: React.FC = () => {
           </div>
 
           <div>
-            <label className="text-slate-400 text-[11px] block mb-1">Strength</label>
+            <label className="text-slate-300 text-[11px] block mb-1.5 font-medium">Strength</label>
             <input
               type="range"
               min="0.0"
@@ -362,136 +365,63 @@ export const XYControlsPanel: React.FC = () => {
               step="0.05"
               value={xyConfig.distortionAmount}
               onChange={(e) => updateXYConfig({ distortionAmount: parseFloat(e.target.value) })}
-              className="w-full mt-1.5"
+              className="w-full mt-2"
             />
           </div>
         </div>
 
         <div className="grid grid-cols-2 gap-2 pt-1">
-          <label className="flex items-center gap-1.5 cursor-pointer text-slate-300 text-[11px]">
+          <label className="flex items-center gap-2 cursor-pointer p-2 rounded-lg bg-studio-900/60 border border-white/[0.06] text-slate-300 text-[11px] hover:border-cyan-500/30">
             <input
               type="checkbox"
               checked={xyConfig.polarMode}
               onChange={(e) => updateXYConfig({ polarMode: e.target.checked })}
-              className="rounded bg-studio-800 border-studio-700 text-cyan-500 focus:ring-0"
+              className="rounded bg-studio-800 border-white/[0.1] text-cyan-500 focus:ring-0"
             />
             <span>Polar Mapping (R/θ)</span>
           </label>
 
-          <label className="flex items-center gap-1.5 cursor-pointer text-slate-300 text-[11px]">
+          <label className="flex items-center gap-2 cursor-pointer p-2 rounded-lg bg-studio-900/60 border border-white/[0.06] text-slate-300 text-[11px] hover:border-cyan-500/30">
             <input
               type="checkbox"
               checked={xyConfig.kaleidoscope}
               onChange={(e) => updateXYConfig({ kaleidoscope: e.target.checked })}
-              className="rounded bg-studio-800 border-studio-700 text-cyan-500 focus:ring-0"
+              className="rounded bg-studio-800 border-white/[0.1] text-cyan-500 focus:ring-0"
             />
             <span>Mirror Reflection</span>
           </label>
         </div>
       </div>
 
-      {/* ================= 5. MULTI-LAYER XY CURVES ================= */}
-      <div className="space-y-3 pt-2 border-t border-studio-800">
+      {/* ================= 5. CURATED XY PRESETS ================= */}
+      <div className="space-y-3 pt-3 border-t border-white/[0.08]">
         <div className="flex items-center justify-between">
-          <span className="text-[10px] font-mono uppercase text-cyan-400 font-semibold tracking-wider">
-            5. Multi-Layer XY Curves
+          <span className="text-[10px] font-mono uppercase text-cyan-400 font-bold tracking-wider">
+            5. Flagship XY Presets
           </span>
-          <button
-            onClick={addXYLayer}
-            className="flex items-center gap-1 px-2 py-0.5 rounded bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-500/40 text-[10px] font-medium transition-all"
-          >
-            <Plus className="w-3 h-3" />
-            <span>Add Layer</span>
-          </button>
+          <span className="text-[10px] font-mono text-slate-400">{XY_FLAGSHIP_PRESETS.length}</span>
         </div>
 
-        {xyConfig.layers.length === 0 ? (
-          <p className="text-[10px] text-slate-500 italic">
-            Single primary trajectory. Click "Add Layer" to render multiple harmonic curves simultaneously.
-          </p>
-        ) : (
-          <div className="space-y-2">
-            {xyConfig.layers.map((layer) => (
-              <div key={layer.id} className="p-2.5 rounded-lg bg-studio-850 border border-studio-750 space-y-2">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={() => updateXYLayer(layer.id, { enabled: !layer.enabled })}
-                      className="text-slate-400 hover:text-slate-200"
-                    >
-                      {layer.enabled ? <Eye className="w-3.5 h-3.5 text-cyan-400" /> : <EyeOff className="w-3.5 h-3.5 text-slate-600" />}
-                    </button>
-                    <span className="font-semibold text-slate-200 text-xs">{layer.name}</span>
-                  </div>
-                  <button
-                    onClick={() => removeXYLayer(layer.id)}
-                    className="p-1 text-slate-500 hover:text-red-400"
-                  >
-                    <Trash2 className="w-3.5 h-3.5" />
-                  </button>
-                </div>
-
-                <div className="grid grid-cols-2 gap-2 text-[11px]">
-                  <div>
-                    <label className="text-slate-400 block mb-0.5">Color</label>
-                    <input
-                      type="color"
-                      value={layer.color}
-                      onChange={(e) => updateXYLayer(layer.id, { color: e.target.value })}
-                      className="w-full h-6 rounded border border-studio-700 bg-transparent cursor-pointer"
-                    />
-                  </div>
-                  <div>
-                    <div className="flex justify-between items-center mb-0.5">
-                      <span className="text-slate-400">Scale</span>
-                      <span className="font-mono text-cyan-400">{layer.scale.toFixed(2)}×</span>
-                    </div>
-                    <input
-                      type="range"
-                      min="0.3"
-                      max="1.5"
-                      step="0.05"
-                      value={layer.scale}
-                      onChange={(e) => updateXYLayer(layer.id, { scale: parseFloat(e.target.value) })}
-                      className="w-full"
-                    />
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-
-      {/* ================= 6. 15 FLAGSHIP PRESETS ================= */}
-      <div className="space-y-3 pt-2 border-t border-studio-800">
-        <span className="text-[10px] font-mono uppercase text-cyan-400 font-semibold tracking-wider block">
-          6. Flagship Lissajous Presets (15 Presets)
-        </span>
-
-        <div className="space-y-1.5 max-h-72 overflow-y-auto pr-1">
+        <div className="grid grid-cols-1 gap-2">
           {XY_FLAGSHIP_PRESETS.map((p) => {
-            const isSelected = activeXYPresetId === p.id;
+            const isCurrent = activeXYPresetId === p.id;
             return (
               <button
                 key={p.id}
                 onClick={() => loadXYPreset(p.id)}
-                className={`w-full text-left p-2.5 rounded-lg border transition-all flex items-start justify-between gap-2 ${
-                  isSelected
-                    ? 'border-cyan-500 bg-cyan-950/40 text-cyan-200 shadow-sm shadow-cyan-500/10'
-                    : 'border-studio-800 bg-studio-850 hover:bg-studio-800 text-slate-300'
+                className={`w-full text-left p-2.5 rounded-xl border transition-all cursor-pointer ${
+                  isCurrent
+                    ? 'border-cyan-400 bg-cyan-950/60 text-cyan-200 shadow-[0_0_15px_rgba(0,240,255,0.2)]'
+                    : 'border-white/[0.08] bg-studio-900/80 hover:bg-studio-850 hover:border-white/[0.14] text-slate-300'
                 }`}
               >
-                <div className="flex-1 min-w-0">
-                  <div className="font-semibold text-xs truncate flex items-center gap-1.5">
-                    <span className={isSelected ? 'text-cyan-300' : 'text-slate-200'}>{p.name}</span>
-                    {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />}
-                  </div>
-                  <p className="text-[10px] text-slate-400 mt-0.5 line-clamp-1">
-                    {p.description}
-                  </p>
+                <div className="flex items-center justify-between">
+                  <span className="font-semibold text-xs text-white">{p.name}</span>
+                  {isCurrent && <Check className="w-3.5 h-3.5 text-cyan-400" />}
                 </div>
-                {isSelected && <Check className="w-4 h-4 text-cyan-400 mt-0.5" />}
+                <div className="text-[10px] text-slate-400 mt-0.5 line-clamp-1 font-mono">
+                  {p.description}
+                </div>
               </button>
             );
           })}
