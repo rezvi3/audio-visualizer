@@ -83,8 +83,8 @@ The **XY Oscilloscope** is the flagship generative instrument of the application
 
 ```bash
 # Clone the repository
-git clone <repo-url>
-cd visualizer
+git clone https://github.com/rezvi3/audio-visualizer.git
+cd audio-visualizer
 
 # Install dependencies
 npm install
